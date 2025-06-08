@@ -12,24 +12,24 @@ def display_current_datetime():
     print("Current Date and Time:", formatted)
 
 # Part 2: Calculate a Future Date
-def calculate_future_date(days):
-    # Get today's date (date only, no time)
-    current_date = datetime.date.today()
+def calculate_future_date(days_to_add):
+    # Get today's date (just the date, no time)
+    today = datetime.date.today()
 
     # Calculate the future date
-    future_date = current_date + datetime.timedelta(days=days)
+    future_date = today + datetime.timedelta(days=days_to_add)
 
     # Print the future date in "YYYY-MM-DD" format
     print("Future Date:", future_date.strftime("%Y-%m-%d"))
 
-# Run the program
+# Main program
 if __name__ == "__main__":
-    # Part 1
+    # Display current date and time
     display_current_datetime()
 
-    # Part 2
+    # Prompt user for number of days
     try:
-        days_input = int(input("Enter number of days to add: "))
-        calculate_future_date(days_input)
+        num_days = int(input("Enter number of days to add: "))
+        calculate_future_date(num_days)
     except ValueError:
-        print("Invalid input. Please enter a valid integer.")
+        print("Invalid input. Please enter an integer.")
