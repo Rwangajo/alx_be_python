@@ -27,7 +27,8 @@ if __name__ == "__main__":
     display_current_datetime()
 
     try:
-        num_days = int(input("Enter number of days to add: "))
+        # ✅ Use the exact expected prompt
+        num_days = int(input("Enter the number of days to add to the current date:"))
         calculate_future_date(num_days)
     except ValueError:
         print("Invalid input. Please enter an integer.")
