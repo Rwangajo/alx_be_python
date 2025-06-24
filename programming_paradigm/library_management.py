@@ -38,6 +38,10 @@ class Library:
         print(f"No record of '{title}' being checked out.")
 
     def list_available_books(self):
+        found = False
         for book in self._books:
             if book.is_available():
                 print(f"{book.title} by {book.author}")
+                found = True
+        if not found:
+            print("No available books at the moment.")
