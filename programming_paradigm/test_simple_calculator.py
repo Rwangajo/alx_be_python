@@ -27,7 +27,7 @@ class TestSimpleCalculator(unittest.TestCase):
         self.assertEqual(self.calc.add(100, 200), 300, "Should be 300")
         self.assertEqual(self.calc.add(2.5, 3.5), 6.0, "Should handle floats")
 
-    def test_subtract(self):
+    def test_subtraction(self): # Renamed from test_subtract
         """
         Test the subtract method with various positive, negative, and zero inputs.
         """
