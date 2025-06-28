@@ -6,6 +6,9 @@ class Book:
     def get_description(self):
         return f"Book: {self.title} by {self.author}"
 
+    def __str__(self):
+        return self.get_description()
+
 
 class EBook(Book):
     def __init__(self, title, author, file_size):
@@ -15,6 +18,9 @@ class EBook(Book):
     def get_description(self):
         return f"EBook: {self.title} by {self.author}, File Size: {self.file_size}KB"
 
+    def __str__(self):
+        return self.get_description()
+
 
 class PrintBook(Book):
     def __init__(self, title, author, page_count):
@@ -23,6 +29,9 @@ class PrintBook(Book):
 
     def get_description(self):
         return f"PrintBook: {self.title} by {self.author}, Page Count: {self.page_count}"
+
+    def __str__(self):
+        return self.get_description()
 
 
 class Library:
@@ -35,4 +44,6 @@ class Library:
         else:
             print("Only Book instances can be added to the library.")
 
-    def l
+    def list_books(self):
+        for book in self.books:
+            print(book)  # __str__ will be called here
