@@ -1,45 +1,38 @@
-import sys
+# robust_division_calculator.py
 
-class BankAccount:
-    def __init__(self, initial_balance=0):
-        self.account_balance = initial_balance
+def safe_divide(numerator, denominator):
+    """
+    Performs division, handling potential errors like division by zero
+    and non-numeric inputs.
 
-    def deposit(self, amount):
-        self.account_balance += amount
+    Args:
+        numerator: The dividend (can be a string or numeric type).
+        denominator: The divisor (can be a string or numeric type).
 
-    def withdraw(self, amount):
-        if amount <= self.account_balance:
-            self.account_balance -= amount
-            return True
-        else:
-            return False
+    Returns:
+        A string message indicating the result of the division or an error.
+    """
+    try:
+        # Attempt to convert numerator and denominator to floats
+        num = float(numerator)
+        den = float(denominator)
 
-    def display_balance(self):
-        print(f"Current Balance: ${self.account_balance}")
+        # Check for division by zero explicitly to return the specified message
+        if den == 0:
+            return "Error: Cannot divide by zero."
+        
+        # Perform division if no errors so far
+        result = num / den
+        return f"The result of the division is {result}"
 
-def main():
-    account = BankAccount(100)  # Starting balance
+    except ValueError:
+        # Catch ValueError if conversion to float fails (non-numeric input)
+        return "Error: Please enter numeric values only."
+    except ZeroDivisionError:
+        # This block is technically redundant given the 'if den == 0' check,
+        # but included for clarity to show specific error handling.
+        return "Error: Cannot divide by zero."
+    except Exception as e:
+        # Catch any other unexpected errors for general robustness
+        return f"An unexpected error occurred: {e}"
 
-    if len(sys.argv) < 2:
-        print("Usage: python script.py <command>:<amount>")
-        print("Commands: deposit, withdraw, display")
-        sys.exit(1)
-
-    command, *params = sys.argv[1].split(':')
-    amount = float(params[0]) if params else None
-
-    if command == "deposit" and amount is not None:
-        account.deposit(amount)
-        print(f"Deposited: ${amount}")
-    elif command == "withdraw" and amount is not None:
-        if account.withdraw(amount):
-            print(f"Withdrew: ${amount}")
-        else:
-            print("Insufficient funds.")
-    elif command == "display":
-        account.display_balance()
-    else:
-        print("Invalid command.")
-
-if __name__ == "__main__":
-    main()
